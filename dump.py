@@ -13,8 +13,8 @@ for file in glob.glob(data_path):
 	db = shelve.open(os.path.join(os.getcwd(), 'data', file[:-4]))
 	print(str(os.path.basename(file[:-4])))
 	if os.path.basename(file[:-4]) in ['daily', 'dailysilvercar', 'sixttransition']:
-		for k,v in sorted(db.items()):
-			print(k  + ',' + v[1] + ',' + v[2] + ',' + v[3])
+		for k, v in sorted(db.items()):
+			print(k + ',' + v[1] + ',' + v[2] + ',' + v[3])
 	else:
 		for k, v in sorted(db.items()):
 			print(k + ',' + str(v))

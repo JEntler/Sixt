@@ -1,6 +1,9 @@
-from tools import *
+#! python3
+# file_add.py
 
-s = ''
+from report_utils import extract_volumes
+from invoice_utils import calculate_costs, calculate_total_volume, calculate_total_cost, create_daily_report
+
 
 def sixt_daily(s, date_file, file_name):
 	price_db = 'opisData'
@@ -14,10 +17,11 @@ def sixt_daily(s, date_file, file_name):
 
 	create_daily_report(date_file, ppg, total_volume, total_cost, daily_db)
 
-#for i in range (12, 26):
-#	date_file = '2016-12-' + str(i)
-#	file_name = str(i) + 'sixt.xls'
-#	sixt_daily(s, date_file, file_name)
+# for i in range (12, 26):
+# 	date_file = '2016-12-' + str(i)
+# 	file_name = str(i) + 'sixt.xls'
+# 	sixt_daily(s, date_file, file_name)
+
 
 def silvercar_daily(s, date_file, file_name):
 	price_db = 'opisMidgrade'
@@ -31,7 +35,7 @@ def silvercar_daily(s, date_file, file_name):
 
 	create_daily_report(date_file, ppg, total_volume, total_cost, daily_db)
 
-#for i in range (12, 26):
-#	date_file = '2016-12-' + str(i)
-#	file_name = str(i) + 'silvercar.xls'
-#	silvercar_daily(s, date_file, file_name)
+# for i in range (12, 26):
+# 	date_file = '2016-12-' + str(i)
+# 	file_name = str(i) + 'silvercar.xls'
+# 	silvercar_daily(s, date_file, file_name)

@@ -1,8 +1,10 @@
+*.csv
+*.pdf
+*.xls
+
 data/
 records/
 templates/
 __pycache__/
-zero.xls
-black_truck.xls
-white_truck_000.xls
-white_truck_111.xls
+
+credentials.py
