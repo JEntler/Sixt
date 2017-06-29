@@ -13,5 +13,6 @@ else:
 
 s = requests.session()
 
-sixt_daily(s, date_file, truck='both', test=True)
-silvercar_daily(s, date_file, truck='white', test=True)
+test = True
+sixt_daily(s, date_file, truck='both', test=test)
+silvercar_daily(s, date_file, truck='white', test=test)
