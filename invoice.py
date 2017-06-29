@@ -21,7 +21,8 @@ def sixt_invoice(test):
 		emailto = emailtoCc = emailtoBcc = credentials.TEST_USER
 
 	invoice_num = render_html(invoice_db, daily_db, report_html, render_name, billing_period)
-	pdf_name = str("Sixt_Invoice #" + str(invoice_num) + " {}".format(credentials.SIXT_NAME) + ".pdf")
+	pdf_name = str(
+		"Sixt_Invoice #" + str(invoice_num) + " {}".format(credentials.SIXT_NAME) + ".pdf")
 	make_pdf(render_name, pdf_name)
 	email_pdf(pdf_name, emailto, emailtoCc, emailtoBcc)
 

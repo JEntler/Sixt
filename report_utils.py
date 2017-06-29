@@ -90,7 +90,10 @@ def calculate_total_cost(costs):
 
 def create_daily_report(date_file, ppg, total_volume, total_cost, daily_db):
 	date_delivery = date_file.replace("-", "/")
-	day_report = [str(date_delivery), str(ppg[0]), str(total_volume), str(total_cost), total_volume, total_cost]
+	day_report = [
+		str(date_delivery), str(ppg[0]), str(total_volume),
+		str(total_cost), total_volume, total_cost
+	]
 	shelfFile = shelve.open(os.path.join(os.getcwd(), 'data', daily_db))
 	shelfFile[date_file] = day_report
 	print("Stored kv pair: " + date_file + ", " + str(day_report))
@@ -106,19 +109,27 @@ def create_tickets(short_date, time, plates, ppg, volumes, costs):
 def create_csv(csv_file, tickets, total_volume, total_cost):
 	with open(csv_file, 'w', newline='') as f:
 		w = csv.writer(f)
-		w.writerow(['refuel_date', 'time_of_delivery', 'license_plate_number', 'unit_cost', 'gallons', 'total_cost'])
+		w.writerow([
+			'refuel_date', 'time_of_delivery', 'license_plate_number', 'unit_cost', 'gallons', 'total_cost'
+		])
 		for ticket in tickets:
 			w.writerow(ticket)
 		w.writerow(['', '', '', '', str(total_volume), str(total_cost)])
 
 
-def report_to_csv(file_name):
-	plates = extract_plates(file_name)
-	dates = extract_dates(file_name)
-	volumes = extract_volumes(file_name)
+def reports_to_csv(files, price_db, daily_db, date_file, csv_file):
+	plates = []
+	dates = []
+	volumes = []
+	costs = []
+	ppg = []
 
-	costs = calculate_costs(file_name, price_db, date_file)[0]
-	ppg = calculate_costs(file_name, price_db, date_file)[1]
+	for file_name in files:
+		plates.extend(extract_plates(file_name))
+		dates.extend(extract_dates(file_name))
+		volumes.extend(extract_volumes(file_name))
+		costs.extend(calculate_costs(file_name, price_db, date_file)[0])
+		ppg.extend(calculate_costs(file_name, price_db, date_file)[1])
 
 	total_volume = calculate_total_volume(volumes)
 	total_cost = calculate_total_cost(costs)
@@ -128,3 +139,20 @@ def report_to_csv(file_name):
 	short_date, time = convert_dates(dates)
 	tickets = create_tickets(short_date, time, plates, ppg, volumes, costs)
 	create_csv(csv_file, tickets, total_volume, total_cost)
+
+
+def reports_to_db(files, price_db, daily_db, date_file):
+	volumes = []
+	costs = []
+	ppg = []
+
+	for file_name in files:
+		volumes.extend(extract_volumes(file_name))
+		costs.extend(calculate_costs(file_name, price_db, date_file)[0])
+		ppg.extend(calculate_costs(file_name, price_db, date_file)[1])
+
+	total_volume = calculate_total_volume(volumes)
+	total_cost = calculate_total_cost(costs)
+
+	create_daily_report(date_file, ppg, total_volume, total_cost, daily_db)
+	return ppg
