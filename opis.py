@@ -1,5 +1,5 @@
 #! python3
-# opis.pyw
+# opis.py
 
 import os
 import time
