@@ -92,7 +92,7 @@ def email_pdf(pdf_name, emailto, emailtoCc, emailtoBcc):
 	msg["From"] = emailfrom
 	msg["To"] = ", ".join(emailto)
 	msg["Cc"] = ", ".join(emailtoCc)
-	msg["Subject"] = str(pdf_name)[:-4]
+	msg["Subject"] = "81012272 {}".format(credentials.SIXT_NAME)
 	msg.preamble = ''
 
 	ctype, encoding = mimetypes.guess_type(fileToSend)

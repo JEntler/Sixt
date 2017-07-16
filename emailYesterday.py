@@ -1,11 +1,7 @@
 #! python3
 # emailYesterday.py
 
-try:
-	import opis
-except ZeroDivisionError:
-	print("OPIS Failure")
-
+import opis
 import requests
 from customer_utils import sixt_daily, silvercar_daily
 import datetime as DT
@@ -18,5 +14,6 @@ else:
 s = requests.session()
 
 test = False
+
 sixt_daily(s, date_file, truck='both', test=test)
 silvercar_daily(s, date_file, truck='white', test=test)
