@@ -32,7 +32,7 @@ def silvercar_invoice():
 	daily_db = 'dailysilvercar'
 	report_html = 'report_silvercar.html'
 	render_name = 'render_silvercar.html'
-	billing_period = 30  # 31
+	billing_period = 31  # 31
 
 	invoice_num = render_html(invoice_db, daily_db, report_html, render_name, billing_period)
 	pdf_name = str("Silvercar_Invoice #" + str(invoice_num) + ".pdf")

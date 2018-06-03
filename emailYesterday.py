@@ -1,7 +1,7 @@
 #! python3
 # emailYesterday.py
 
-import opis
+#import opis
 import requests
 from customer_utils import sixt_daily, silvercar_daily
 import datetime as DT

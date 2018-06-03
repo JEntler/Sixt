@@ -16,7 +16,7 @@ def sixt_daily(s, date_file, truck, test):
 	daily_db = 'daily'
 	csv_file = 'Refuel Schedule ' + date_file + '.csv'
 
-	download_tcs_report(s, '71224W1', '', date_file, 'black_truck.xls')
+	download_tcs_report(s, '71224W1', 'sixt', date_file, 'black_truck_000.xls')
 	download_tcs_report(s, '49178A2', 'sixt', date_file, 'white_truck_000.xls')
 
 	if truck == 'zero':
@@ -27,12 +27,12 @@ def sixt_daily(s, date_file, truck, test):
 	elif truck == 'white':
 		files = ['white_truck_000.xls']
 	elif truck == 'black':
-		files = ['black_truck.xls']
+		files = ['black_truck_000.xls']
 	elif truck == 'both':
-		files = ['black_truck.xls', 'white_truck_000.xls']
+		files = ['black_truck_000.xls', 'white_truck_000.xls']
 
 	reports_to_csv(files, price_db, daily_db, date_file, csv_file)
-	email_csv(send_to, send_to_cc, send_to_bcc, csv_file)
+	#email_csv(send_to, send_to_cc, send_to_bcc, csv_file)
 
 
 def silvercar_daily(s, date_file, truck, test):
@@ -47,12 +47,17 @@ def silvercar_daily(s, date_file, truck, test):
 	daily_db = 'dailysilvercar'
 	grade = "Midgrade"
 
+	download_tcs_report(s, '71224W1', 'silvercar', date_file, 'black_truck_111.xls')
 	download_tcs_report(s, '49178A2', 'silvercar', date_file, 'white_truck_111.xls')
 
 	if truck == 'white':
 		files = ['white_truck_111.xls']
+	elif truck == 'black':
+		files = ['black_truck_111.xls']
+	elif truck == 'both':
+		files = ['black_truck_111.xls', 'white_truck_111.xls']
 	elif truck == 'zero':
 		files = ['zero.xls']
 
 	ppg = reports_to_db(files, price_db, daily_db, date_file)
-	email_price(send_to, send_to_cc, send_to_bcc, date_file, grade, ppg)
+	#email_price(send_to, send_to_cc, send_to_bcc, date_file, grade, ppg)
